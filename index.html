@@ -244,10 +244,9 @@
 
 <body>
   <audio id="birthdayAudio" autoplay loop>
-    <source src="birthday.mp3" type="audio/mpeg">
+    <source src="birthday.mp3" type="Audio/mpeg" />
     Your browser does not support the audio element.
-</audio>
-
+  </audio>
   <div class="banner">
     <div class="slider" style="--quantity: 10">
       <div class="item" style="--position: 1">
@@ -293,6 +292,22 @@
       <h1 data-content="HAPPY BIRTHDAY" style="opacity: 0.9; color: rgb(205, 5, 38);">HAPPY BIRTHDAY</h1>
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var audio = document.getElementById("birthdayAudio");
+        var playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log("Audio started automatically.");
+            }).catch(() => {
+                document.addEventListener("click", function () {
+                    audio.play();
+                }, { once: true });
+            });
+        }
+    });
+  </script>
 </body>
 
 </html>
